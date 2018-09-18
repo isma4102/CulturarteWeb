@@ -46,9 +46,9 @@
                     out.print("<td>" +lista.get(i).getNickName()+ "</td>");
                     out.print("<td>" + lista.get(i).getNombre() + "</td>");
                     out.print("<td>" + lista.get(i).getApellido() + "</td>");
-                    out.print("<td><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#VerInfoPropuesta\">Seguir</button>");
+                    out.print("<td><button type=\"button\" class=\"btn btn-primary\" onclick=\"#\">Seguir</button>");
                     out.print("&nbsp;&nbsp;&nbsp;&nbsp;");
-                    out.print("<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#VerInfoPropuesta\">Dejar de Seguir</button><td>");
+                    out.print("<button type=\"button\" class=\"btn btn-primary\" onclick=\"#\">Dejar de Seguir</button><td>");
                     out.print("</tr>");
       
                 }
