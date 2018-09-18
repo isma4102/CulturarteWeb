@@ -42,6 +42,8 @@ private static final long serialVersionUID = 1L;
         
        List<DtUsuario> lista = ICU.ListarProponentes2();
         request.setAttribute("usuarios", lista);
+        
+        request.getRequestDispatcher("Vistas/SeguirUsuario.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
