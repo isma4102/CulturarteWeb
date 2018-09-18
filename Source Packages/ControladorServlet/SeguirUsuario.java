@@ -8,6 +8,9 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +24,7 @@ import logica.Interfaces.IControladorUsuario;
  *
  * @author PabloDesk
  */
-@WebServlet(name = "SeguirUsuario", urlPatterns = {"/SeguirUsuario"})
+@WebServlet("/SeguirUsuario")
 public class SeguirUsuario extends HttpServlet {
 private static final long serialVersionUID = 1L;
     Fabrica fabrica=Fabrica.getInstance();
@@ -36,12 +39,14 @@ private static final long serialVersionUID = 1L;
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
-           ICU.CargarUsuarios();
-        
+        ICU.CargarUsuarios(); 
        List<DtUsuario> lista = ICU.ListarUsuarios();
-        request.setAttribute("usuarios", lista);
+       request.setAttribute("usuarios", lista);
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Vistas/SeguirUsuario.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,6 +75,28 @@ private static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DtUsuario usuario = Login.getUsuarioSesion(request);   
+
+       
+       if (usuario != null) {
+			String seguidor = usuario.getNickName();
+			String seguido = request.getParameter("seguido");
+                        String accion = request.getParameter("accion");
+                        
+			if (accion.equals("seguir")) {
+                            try {
+                                ICU.seguirUsuario(seguidor, seguido);
+                            } catch (Exception ex) {
+                                Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+			} else {
+                            try {
+                                ICU.dejarseguirUsuario(seguidor, seguido);
+                            } catch (Exception ex) {
+                                Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+			}
+		}
         processRequest(request, response);
     }
 

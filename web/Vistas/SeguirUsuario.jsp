@@ -14,17 +14,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Culturarte:: Seguir Usuario</title>
-    </head>
-    
-<jsp:include page="/SeguirUsuario"/>;
-      
-        <body>
         
+    </head>
+   
+        <body>
+         <h3 align="center" >Usuarios de Culturarte</h3>
         <table class="table table-bordered table-hover  formulario" style="margin-left: 192px; width: 88%;">
-            
+           
             <thead>
-                <h3 style=" position: absolute; top: 76px;left: 358px;">Usuarios</h3>
+               
                 <form class="navbar-form navbar-right">
+           
                     <input style="width: 184px;margin-left: 330px;margin-top: 12px;margin-bottom: -23px;" type="text" class="form-control" placeholder="Buscar" />
                 </form>
                  <tr>
