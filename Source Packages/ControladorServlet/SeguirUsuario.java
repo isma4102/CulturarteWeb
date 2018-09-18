@@ -8,6 +8,9 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +41,9 @@ private static final long serialVersionUID = 1L;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-           ICU.CargarUsuarios();
+        ICU.CargarUsuarios(); 
+       List<DtUsuario> lista = ICU.ListarUsuarios();
+       request.setAttribute("usuarios", lista);
         
        List<DtUsuario> lista = ICU.ListarProponentes2();
         request.setAttribute("usuarios", lista);
@@ -72,6 +77,28 @@ private static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DtUsuario usuario = Login.getUsuarioSesion(request);   
+
+       
+       if (usuario != null) {
+			String seguidor = usuario.getNickName();
+			String seguido = request.getParameter("seguido");
+                        String accion = request.getParameter("accion");
+                        
+			if (accion.equals("seguir")) {
+                            try {
+                                ICU.seguirUsuario(seguidor, seguido);
+                            } catch (Exception ex) {
+                                Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+			} else {
+                            try {
+                                ICU.dejarseguirUsuario(seguidor, seguido);
+                            } catch (Exception ex) {
+                                Logger.getLogger(SeguirUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+			}
+		}
         processRequest(request, response);
     }
 

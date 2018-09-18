@@ -30,22 +30,10 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     public String MENSAJE = null;
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletAltaUsuario</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletAltaUsuario at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,7 +76,7 @@ public class ServletAltaUsuario extends HttpServlet {
                 String biografia = request.getParameter("biografia");
                 String tipoP = request.getParameter("tipo");
                 String imagen = "";
-
+                
                 if (tipoP == "proponente") {
                     Calendar cal;
                     DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
@@ -128,7 +116,7 @@ public class ServletAltaUsuario extends HttpServlet {
                 processRequest(request, response);
                 break;
         }
-
+        
     }
 
     /**

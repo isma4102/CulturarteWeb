@@ -29,10 +29,8 @@ import logica.Interfaces.IPropCat;
 @WebServlet(name = "ServletRegistrarColaboracion", urlPatterns = {"/Registrar-colaboracion"})
 public class ServletRegistrarColaboracion extends HttpServlet {
 
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("Vistas/RegistrarColaboracion.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,12 +44,12 @@ public class ServletRegistrarColaboracion extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
+       IControladorUsuario ICU = Fabrica.getInstance().getIControladorUsuario();
         IPropCat IPC = Fabrica.getInstance().getControladorPropCat();
-        IPC.comprobarBaseCat();
+     /*   IPC.comprobarBaseCat();
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
-        IPC.CargarColaboraciones();
+        IPC.CargarColaboraciones();*/
         List<DtNickTitProp> lista = IPC.listarPropuestaC();
         List<DtinfoColaborador> lista2 = ICU.ListarColaboradores();
         request.setAttribute("lista_propuestas", lista);
