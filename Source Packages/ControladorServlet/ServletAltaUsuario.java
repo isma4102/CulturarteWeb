@@ -6,19 +6,29 @@ package ControladorServlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Fabrica;
+import logica.Interfaces.IControladorUsuario;
 
-@WebServlet("/registrarse")
+@WebServlet(name = "ServletAltaUsuario", urlPatterns = {"/altaUsuarioServlet"})
+
 public class ServletAltaUsuario extends HttpServlet {
+
+    IControladorUsuario iUsuario;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,24 +39,9 @@ public class ServletAltaUsuario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public static final String MENSAJE_ERROR = "mensaje_error";
-    public static final String MENSAJE_EXITO = "mensaje_exito";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletAltaUsuario</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletAltaUsuario at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getRequestDispatcher("Vistas/altaUsuario.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,70 +69,47 @@ public class ServletAltaUsuario extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        iUsuario = Fabrica.getInstance().getIControladorUsuario();
+        Boolean ok = false;
         String nick = request.getParameter("nick");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String correo = request.getParameter("correo");
         String pass = request.getParameter("pass");
         String fecha = (request.getParameter("fecha") == null ? "" : request.getParameter("fecha"));
-        String confPass = request.getParameter("confPass");
+        String pass2 = request.getParameter("pass2");
         String direccion = request.getParameter("direccion");
         String sitio = request.getParameter("sitio");
         String biografia = request.getParameter("biografia");
         String tipoP = request.getParameter("tipo");
         String imagen = "";
+        Date nacimiento = ParseFecha(fecha);
+        Calendar cal = dateToCalendar(nacimiento);
+        if (!pass.equals(pass2)) {
+            request.setAttribute("malPass", "Sus contraseñas no coinciden");
+            request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+        }
 
         if (tipoP == "proponente") {
-            if (!nick.equals("") && !apellido.equals("") && !correo.equals("") && !fecha.equals("") && !pass.equals("") && !confPass.equals("")) {
-                Calendar cal;
-                DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
-                format.format(fecha);
-                cal = format.getCalendar();
-                try {
-                    logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
-                    String mensajeExito = "Imagen subida correctamente";
-                    request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
-                    request.getSession().setAttribute("nick", nick);
-                    request.getRequestDispatcher("/Vistas/exito.jsp").include(request, response);
-                } // try
-                catch (ExceptionInInitializerError | Exception a) {
-                    String mensajeError = "Error al dar registrar este usuario";
-                    request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                    request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
-                } // catch           
 
+            ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
+            if (ok) {
+                request.setAttribute("mensaje", "Se registro exitosamente");
             } else {
-                String mensajeError = "Debe completar todos los campos obligatorios";
-                request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                request.getRequestDispatcher("").forward(request, response);
+                request.setAttribute("mensaje", "Error al registrar este usuario");
             }
+            request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         } else {
-            if (!nick.equals("") && !apellido.equals("") && !correo.equals("") && !fecha.equals("") && !pass.equals("") && !confPass.equals("") && !sitio.equals("") && !direccion.equals("") && !biografia.equals("")) {
-
-                Calendar cal;
-                DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
-                format.format(fecha);
-                cal = format.getCalendar();
-                try {
-                    logica.Controladores.ControladorUsuario.getInstance().AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, pass, pass);
-                    String mensajeExito = "Imagen subida correctamente";
-                    request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
-                    request.getSession().setAttribute("nick", nick);
-                    request.getRequestDispatcher("/Vistas/exito.jsp").include(request, response);
-                } // try
-                catch (ExceptionInInitializerError | Exception a) {
-                    String mensajeError = "Error al dar registrar este usuario";
-                    request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                    request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
-                } // catch           
-
+            ok = iUsuario.AgregarUsuarioColaborador(nick, nombre, apellido, correo, cal, imagen, pass);
+            if (ok) {
+                request.setAttribute("mensaje", "Se registro exitosamente");
             } else {
-                String mensajeError = "Debe completar todos los campos obligatorios";
-                request.getSession().setAttribute(MENSAJE_ERROR, mensajeError);
-                request.getRequestDispatcher("/Vistas/error.jsp").forward(request, response);
+                request.setAttribute("mensaje", "Error al dar registrar este usuario");
             }
+            request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
         }
-        processRequest(request, response);
+
     }
 
     /**
@@ -149,5 +121,22 @@ public class ServletAltaUsuario extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Calendar dateToCalendar(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    public Date ParseFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = new Date();
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 
 }
