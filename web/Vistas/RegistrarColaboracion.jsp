@@ -66,7 +66,7 @@
                 <tbody>
                     <% List<DtinfoColaborador> lista2 = (List<DtinfoColaborador>) request.getAttribute("lista_colaboradores");
                         for (int i = 0; i < lista.size(); i++) {
-                            out.print("<form action=\"ServletRegistroColaboracion?opcion=Religiosamente\"  method=\"post\">");
+                            out.print("<form action=\"ServletRegistroColaboracion\"  method=\"post\">");
                             out.print("<tr>");
                             out.print("<label for=\"" + i + "\"></label></td>");
                             out.print("<td>" + lista2.get(i).getNickname() + "</td>");

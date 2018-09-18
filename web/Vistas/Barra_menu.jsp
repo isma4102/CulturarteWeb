@@ -52,15 +52,6 @@
     </div>
 
 
-    <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-    <script type="text/javascript" src="js/plugins/moment/moment.js"></script>
-    <script type="text/javascript" src="js/plugins/knob/jquery.knob.min.js"></script>
-    <script type="text/javascript" src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <script type="text/javascript" src="js/dev-loaders.js"></script>
-    <script type="text/javascript" src="js/dev-layout-default.js"></script>        
-    <script type="text/javascript" src="js/dev-app.js"></script>
+ 
 </body>
 </html>
