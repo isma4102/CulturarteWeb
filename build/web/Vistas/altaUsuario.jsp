@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../css/AltaUsuarioCSS.css">
         <script type="text/javascript" src="../js/validacion.js"></script>
         <script type="text/javascript" src="../js/funcionesAltaUsuario.js"></script>
-        <script type="text/javascript" src="../altaUserJS.js">
+        <script type="text/javascript" src="../script/altaUserJS.js">
 
         </script>
         <%
