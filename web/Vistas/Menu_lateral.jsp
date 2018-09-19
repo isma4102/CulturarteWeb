@@ -27,8 +27,7 @@
                                     <ul  class="submenu" >
                                         <li><a style="color: black" href="/CulturarteWeb/altaUsuarioServlet" >Alta Usuario</a></li>
                                         <li><a style="color: black" href="/CulturarteWeb/SeguirUsuario" >Seguir usuario</a></li>
-                                        <li><a style="color: black" href="#">Ver proponentes</a></li>
-                                        <li><a style="color: black" href="#">Ver colaboradores</a></li>
+                                        <li><a style="color: black" href="/CulturarteWeb/ServletConsultarUsuario">Ver usuarios</a></li>
                                         <li><a style="color: black" href="#">Ver seguidores</a></li>
                                     </ul>
                                 </li>
