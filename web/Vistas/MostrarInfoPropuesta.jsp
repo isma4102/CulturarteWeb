@@ -3,6 +3,8 @@
     Created on : 18/09/2018, 10:40:35 PM
     Author     : Santiago.S
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="javax.swing.ImageIcon"%>
 <%@page import="logica.Clases.DtinfoColaborador"%>
 <%@page import="java.util.List"%>
@@ -47,37 +49,40 @@
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Titulo</span>
-                                    <input readonly  type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTitulo());%>">
+                                    <input readonly  type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTitulo());%>"/>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Descripcion</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getDescripcion());%>">
+                                    <textarea style="resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Tipo de espectaculo</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTipoEspec());%>">
+                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTipoEspec());%>"/>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Lugar</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getLugar());%>">
+                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getLugar());%>"/>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Fecha de relizacion</span>
-                                    <%out.print("<input type=\"date\" id=\"txtfecha\" name=\"txtfecha\" class=\"form-control\" value=\"" + propuestaSelec.getFechaReal() + "\" />");%>
+                                    <%         Date now = new Date();
+                                        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+                                         out.print("<input readonly type=\"text\" class=\"form-control\" placeholder=\""+ sf.format(propuestaSelec.getFechaReal().getTime()) + "\"/>");
+                                       %>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Precio de entrada</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getPrecio());%>">
+                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getPrecio());%>"/>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Monto final</span>
-                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getMonto());%>">
+                                    <input readonly type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getMonto());%>"/>
                                 </div>
                                 </br>
                             </div>
