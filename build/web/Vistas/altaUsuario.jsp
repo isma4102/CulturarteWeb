@@ -9,7 +9,9 @@
         <link rel="stylesheet" type="text/css" href="../css/AltaUsuarioCSS.css">
         <script type="text/javascript" src="../js/validacion.js"></script>
         <script type="text/javascript" src="../js/funcionesAltaUsuario.js"></script>
+        <script type="text/javascript" src="../altaUserJS.js">
 
+        </script>
         <%
             String contraseniasDiferentes = (String) request.getAttribute("malPass");
             if (contraseniasDiferentes != null) {%>
@@ -27,15 +29,7 @@
         </script>
         <%  }
         %>
-        <script type="text/javascript">
-            function mostrarDatos() {
-                var elemento = document.getElementById("otros");
-                if (elemento.style.display === 'block')
-                    document.getElementById("otros").style.display = "none";
-                else
-                    document.getElementById("otros").style.display = "block";
-            }
-        </script>
+
 
     </head>
     <body>
@@ -77,11 +71,11 @@
                 <br>
                 <div>
                     <label>Tipo de persona</label><br>
-                    <input onclick="mostrarDatos()" name="tipo" name="tipoP"  type="radio"  value="colaborador" checked>Soy un colaborador &nbsp;&nbsp;&nbsp;
-                    <input onclick="mostrarDatos()" name="tipo" name="tipoP"  type="radio"  value="proponente">Soy un proponente<br>
+                    <input onclick="desabilitar(this.document)" name="tipoP"  type="radio"  value="colaborador" checked>Soy un colaborador &nbsp;&nbsp;&nbsp;
+                    <input onclick="habilitar(this.document)" name="tipoP"  type="radio"  value="proponente">Soy un proponente<br>
                 </div>
                 <br>
-                <div name="otros" style="display: none">
+                <div name="otros" style="display: block">
                     <div>
                         <label for="direccion">Direccion</label>
                         <input class="form-control" name="direccion" type="text" />
