@@ -12,8 +12,7 @@
         <link rel="stylesheet" type="text/css" href="css/tabs.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <script src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="../jquery.js"></script>
-        <script type="text/javascript" src="js/tabs.js"></script>
+        <script type="text/javascript" src="../js/jquery.js"></script>
         <style>
             .dev-page{visibility: hidden; }            
         </style>
@@ -46,10 +45,8 @@
                     </form>
                 </div>
             </div>
-        </nav>
 
-        <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
-    </div>
+        </nav>
 
 
  

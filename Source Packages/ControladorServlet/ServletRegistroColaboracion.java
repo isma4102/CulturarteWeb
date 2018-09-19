@@ -40,7 +40,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
         List<DtinfoColaborador> lista2 = ICU.ListarColaboradores();
         request.setAttribute("lista_propuestas", lista);
         request.setAttribute("lista_colaboradores", lista2);
-        request.getRequestDispatcher("/Vistas/RegistrarColaboracion.jsp").forward(request, response);
+        request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,10 +69,12 @@ public class ServletRegistroColaboracion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Opcion = request.getParameter("TituloP");
-        DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-        request.setAttribute("Propuestaseleccionada", propuesta);
-        request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
+        if (request.getParameter("TituloP") != null) {
+            String Opcion = (String) request.getParameter("TituloP");
+            DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
+            request.setAttribute("Propuestaseleccionada", propuesta);
+            request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
+        }
     }
 
     /**
