@@ -3,11 +3,9 @@
 <html>
     <head>        
         <title>Culturarte</title>
-
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
-
         <link rel="icon" href="culturarte.ico" type="image/x-icon" >
         <link rel="stylesheet" type="text/css" href="css/tabs.css">
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -18,7 +16,6 @@
         </style>
     </head>
     <body>
-
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -39,16 +36,11 @@
                         <li style="margin-top: 1px; "><a href="#">Tengo una propuesta</a></li>
                         <li style="margin-top: 1px"><a href="#">Quiero ver Propuestas</a></li>
                     </ul>
-
                     <form class="navbar-form navbar-right">
                         <input type="text" class="form-control" placeholder="Buscar" />
                     </form>
                 </div>
             </div>
-
         </nav>
-
-
- 
-</body>
+    </body>
 </html>
