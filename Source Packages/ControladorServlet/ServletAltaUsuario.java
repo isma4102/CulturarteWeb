@@ -89,6 +89,7 @@ public class ServletAltaUsuario extends HttpServlet {
         if (!pass.equals(pass2)) {
             request.setAttribute("malPass", "Sus contraseñas no coinciden");
             request.getRequestDispatcher("/Vistas/altaUsuario.jsp").forward(request, response);
+            return;
         }
 
         if (tipoP == "proponente") {

@@ -11,7 +11,7 @@
         <script type="text/javascript" src="../js/funcionesAltaUsuario.js"></script>
 
         <%
-            String contraseniasDiferentes = (String) request.getAttribute("mensaje");
+            String contraseniasDiferentes = (String) request.getAttribute("malPass");
             if (contraseniasDiferentes != null) {%>
         <script type="text/javascript">
             window.alert("<%=contraseniasDiferentes%>");
