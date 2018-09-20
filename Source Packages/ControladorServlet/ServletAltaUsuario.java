@@ -82,7 +82,7 @@ public class ServletAltaUsuario extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String sitio = request.getParameter("sitio");
         String biografia = request.getParameter("biografia");
-        String tipoP = request.getParameter("tipo");
+        String tipoP = request.getParameter("tipoP");
         String imagen = "";
         Date nacimiento = ParseFecha(fecha);
         Calendar cal = dateToCalendar(nacimiento);
@@ -92,7 +92,7 @@ public class ServletAltaUsuario extends HttpServlet {
             return;
         }
 
-        if (tipoP == "proponente") {
+        if (tipoP.equals("proponente")) {
 
             ok = iUsuario.AgregarUsuarioProponente(nick, nombre, apellido, correo, cal, imagen, direccion, biografia, sitio, pass);
             if (ok) {
