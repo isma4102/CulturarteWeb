@@ -8,14 +8,17 @@ package ControladorServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtUsuario;
+import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
 import logica.Interfaces.IControladorUsuario;
+import logica.Interfaces.IPropCat;
 
 /**
  *
@@ -25,6 +28,7 @@ import logica.Interfaces.IControladorUsuario;
 public class ServletConsultarUsuario extends HttpServlet {
 
     IControladorUsuario ICU;
+    IPropCat ICP;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,9 +77,26 @@ public class ServletConsultarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nickname = request.getParameter("nick");
- DtUsuario dtu= ICU.ObtenerDTUsuario(nickname);
- request.setAttribute("Usuario", dtu);
- request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario2.jsp").forward(request, response);
+        DtUsuario dtu = ICU.ObtenerDTUsuario(nickname);
+        List<DtUsuario> seguidos = ICU.ObtenerSeguidos(nickname);
+        List<DtUsuario> seguidores = ICU.ObtenerSeguidores(nickname);
+        ICU.CargarFavoritas();
+        List<DtinfoPropuesta> favoritas = ICU.obtenerfavoritas(nickname);
+        request.setAttribute("Seguidos", seguidos);
+        request.setAttribute("Seguidores", seguidores);
+        request.setAttribute("Usuario", dtu);
+        request.setAttribute("Favoritas", favoritas);
+        ICP=Fabrica.getInstance().getControladorPropCat();
+        if(dtu.Esproponente()){
+           List<DtinfoPropuesta> propuestas= ICP.ListarPropuestasDeProponenteX(nickname);
+            request.setAttribute("Propuestas",propuestas );
+        }else{
+            Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
+            List<DtinfoPropuesta> colaboraciones=ICU.verPropuestas(nickname);
+            request.setAttribute("Colaboraciones",colaboraciones );
+        }
+                
+        request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario2.jsp").forward(request, response);
     }
 
     /**

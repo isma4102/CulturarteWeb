@@ -6,6 +6,8 @@
 
 
 
+<%@page import="logica.Clases.DtinfoPropuesta"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="logica.Clases.DtUsuario"%>
@@ -17,24 +19,119 @@
         <title>Datos del usuario</title>
     </head>
     <body>
-        <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
-            out.println("<h1>Datos del usuario</h1>");
-            out.println("<h3>Nickname:" + dtu.getNickName() + "</h3>");
-            out.println("<h3>Nombre: " + dtu.getNombre() + "</h3>");
-            out.println("<h3>Apellido:" + dtu.getApellido() + "</h3>");
-            out.println("<h3>Correo:" + dtu.getCorreo() + "</h3>");
-            Calendar cal = dtu.getFechaN();
-            int dia = cal.get(Calendar.DAY_OF_MONTH);
-            int mes = cal.get(Calendar.MONTH) + 1;
-            int anio = cal.get(Calendar.YEAR);
-            out.println("<h3>Fecha de nacimiento:" + dia + "/" + mes + "/" + anio + "</h3>");
+        <div style="text-align: center">
+            <%DtUsuario dtu = (DtUsuario) request.getAttribute("Usuario");
+                out.println("<h1>Datos del usuario</h1>");
+                out.println("<h3>Nickname:" + dtu.getNickName() + "</h3>");
+                out.println("<h3>Nombre: " + dtu.getNombre() + "</h3>");
+                out.println("<h3>Apellido:" + dtu.getApellido() + "</h3>");
+                out.println("<h3>Correo:" + dtu.getCorreo() + "</h3>");
+                Calendar cal = dtu.getFechaN();
+                int dia = cal.get(Calendar.DAY_OF_MONTH);
+                int mes = cal.get(Calendar.MONTH) + 1;
+                int anio = cal.get(Calendar.YEAR);
+                out.println("<h3>Fecha de nacimiento:" + dia + "/" + mes + "/" + anio + "</h3>");
 
-            if (dtu.Esproponente()) {
-                out.println("<h3>Es proponente</h3>");
-            } else {
-                out.println("<h3>Es colaborador</h3>");
-            }%>
+                if (dtu.Esproponente()) {
+                    out.println("<h3>Es proponente</h3>");
+                } else {
+                    out.println("<h3>Es colaborador</h3>");
+                }%>
+        </div>
+        <div style="float:left">
+            <h3 style="margin-left: 200px">Seguidores</h3>
+            <table class="table table-bordered table-hover  formulario" style="margin-left: 200px; width: 88%; margin-top:50px;">
+                <tr>
+                    <th>Nickname</th>
+                    <th>Proponente/Colaborador</th>
+                </tr>
+                <%List<DtUsuario> seguidores = (List<DtUsuario>) request.getAttribute("Seguidores");%>
+                <%for (DtUsuario dtusu : seguidores) {%>
+                <tr>
+                    <td><input name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                        <%if (dtusu.Esproponente()) {%>
+                    <td><input name="nick" type="text" value="Proponente"/>&nbsp;&nbsp;&nbsp;
+                        <%} else {%>
+                    <td><input name="nick" type="text" value="Colaborador"/>&nbsp;&nbsp;&nbsp;
+                        <% }%>
+                </tr>
+                <% }%>
+            </table>
+        </div>
+        <div style="float:right">
+            <h3 style="margin-left: 200px">Seguidos</h3>
+            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                <tr>
+                    <th>Nickname</th>
+                    <th>Proponente/Colaborador</th>
+                </tr>
+                <%List<DtUsuario> seguidos = (List<DtUsuario>) request.getAttribute("Seguidos");%>
+                <%for (DtUsuario dtusu : seguidos) {%>
+                <tr>
+                    <td><input name="nick" type="text" value="<%=dtusu.getNickName()%>"/>&nbsp;&nbsp;&nbsp;
+                        <%if (dtusu.Esproponente()) {%>
+                    <td><input name="nick" type="text" value="Proponente"/>&nbsp;&nbsp;&nbsp;
+                        <%} else {%>
+                    <td><input name="nick" type="text" value="Colaborador"/>&nbsp;&nbsp;&nbsp;
+                        <% }%>
+                </tr>
+                <% }%>
+            </table>
+        </div>
+        <div style="float:left;margin-top: 350px; margin-bottom: 100px;">
+            <h3>Propuestas favoritas</h3>
+            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%;">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Nombre</th>
+                </tr>
+                <%List<DtinfoPropuesta> favoritas = (List<DtinfoPropuesta>) request.getAttribute("Favoritas");
+                for (DtinfoPropuesta dtp : favoritas) {%>
+                <tr>
+                    <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                    <td><textarea><%=dtp.getDescripcion()%></textarea></td>  
 
+                </tr>
+                <%}%>
+            </table> 
+        </div>
+        <%if (dtu.Esproponente()) {%>
+        <div style="float:right; margin-bottom: 100px">
+            <h3>Propuestas creadas</h3>
+            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Nombre</th>
+                </tr>
+                 <%List<DtinfoPropuesta> propuestasdeproponente = (List<DtinfoPropuesta>) request.getAttribute("Propuestas");
+                for (DtinfoPropuesta dtp : propuestasdeproponente) {%>
+                <tr>
+                    <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                    <td><textarea><%=dtp.getDescripcion()%></textarea></td>  
 
-    </body>
+                </tr>
+                <%}%>
+            </table>
+            <%}else{%>
+            <div style="float:right;margin-left: 200px;margin-top: 150px;margin-bottom: 100px">
+                <h3>Colaboraciones</h3>
+            <table class="table table-bordered table-hover  formulario" style="margin-right: 200px; width: 88%; margin-top:50px;">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Nombre</th>
+                </tr>
+                 <%List<DtinfoPropuesta> colaboraciones = (List<DtinfoPropuesta>) request.getAttribute("Colaboraciones");
+                for (DtinfoPropuesta dtp : colaboraciones) {%>
+                <tr>
+                    <td><input name="nick" type="text" value="<%=dtp.getTitulo()%>"/>&nbsp;&nbsp;&nbsp;
+                    <td><textarea><%=dtp.getDescripcion()%></textarea></td>  
+
+                </tr>
+                <%}%>
+            </table>  
+        </div>
+            <%}%>
+</div>
+
+</body>
 </html>
