@@ -32,6 +32,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         IPC.comprobarBaseCat();
         ICU.CargarUsuarios();
         IPC.CargarPropuestas();
@@ -39,7 +40,6 @@ public class ServletRegistroColaboracion extends HttpServlet {
         List<DtNickTitProp> lista = IPC.listarPropuestaC();
         List<DtinfoColaborador> lista2 = ICU.ListarColaboradores();
         request.setAttribute("lista_propuestas", lista);
-        request.setAttribute("lista_colaboradores", lista2);
         request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
     }
 
@@ -69,10 +69,17 @@ public class ServletRegistroColaboracion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Opcion = request.getParameter("TituloP");
-        DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-        request.setAttribute("Propuestaseleccionada", propuesta);
-        request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
+        if (request.getParameter("Ver") != null) {
+            String Opcion = request.getParameter("TituloP");
+            DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
+            request.setAttribute("Propuestaseleccionada", propuesta);
+            request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
+        } else if (request.getParameter("seleccionar") != null) {
+            String Opcion = request.getParameter("TituloP");
+            DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
+            request.setAttribute("Propuestaseleccionada", propuesta);
+             request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
+        }
     }
 
     /**
