@@ -22,7 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Registrar Colaboración</title>
     </head>
-    <body onload="hola()">
+    <body>
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
         <div style="float: left">
