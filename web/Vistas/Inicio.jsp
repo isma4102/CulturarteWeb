@@ -13,5 +13,6 @@
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
+        <jsp:include page="/Vistas/Tabs_Propuestas.jsp" />
     </body>
 </html>
