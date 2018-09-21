@@ -25,8 +25,8 @@
     <body>
 
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <div style="float: left">
-            <table class="table table-bordered table-hover formulario" style="margin-left: 141px; width: 100%;">
+        <div>
+            <table class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
                 <thead>
                 <h3 style=" position: absolute; top: 76px;left: 358px;">Propuestas</h3>
                 <form class="navbar-form navbar-right">
@@ -59,34 +59,5 @@
                 </tbody>
             </table>
         </div>
-
-        <div style="float: right;margin-top: 220px;margin-right: 247px; box-shadow: 0 0 20px 1px rgba(0,0,0,0.3);">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Registro de colaboración</h3>
-                </div>
-                <div class="panel-body">
-                    <form >
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Monto:</label>
-                            <input required type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <div class="dropdown">
-                                        <select id="combo" >
-                                        </select>
-                                    
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Registrar Colaboración</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
-
-
     </body>
 </html>
