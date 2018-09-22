@@ -4,6 +4,7 @@
     Author     : Santiago.S
 --%>
 
+<%@page import="java.net.URLEncoder"%>
 <%@page import="logica.Clases.TipoRetorno"%>
 <%@page import="logica.Clases.DtinfoPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,36 +26,39 @@
     <body>
         <%
             DtinfoPropuesta propuestaSelec = (DtinfoPropuesta) request.getAttribute("Propuestaseleccionada");
+            String pru = URLEncoder.encode(propuestaSelec.getTitulo(), "UTF-8");
         %>
         <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Registrar la colaboracion con la propuesta "<% out.print(propuestaSelec.getTitulo());%>"</h5>
+                        <h4 align="center" class="modal-title" id="exampleModalLabel">Registrar la colaboración con la propuesta "<% out.print(pru);%>"</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form class="form-signin" action="ServletRegistroColaboracion" method="POST">
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Monto</label>
+                                <label required name="Monto" for="recipient-name" class="col-form-label">Monto</label>
                                 <input type="text" class="form-control" id="recipient-name">
                             </div>
-                            <select class="selectpicker">
+                            <select name="Tipo_Retorno" class="form-control" style="width: 26%;">
                                 <% if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.Entradas) == 0) {
-                                        out.print("<option> Entradas </option>");
+                                        out.print("<option>Entradas</option>");
                                     } else if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.porGanancias) == 0) {
-                                        out.print("<option> Por ganancias </option>");
+                                        out.print("<option>Por_ganancias</option>");
                                     } else {
-                                        out.print("<option> Entradas </option>");
-                                        out.print("<option> Por ganancias </option>");
+                                        out.print("<option>Entradas</option>");
+                                        out.print("<option>Por_ganancias</option>");
                                     }
                                 %>
                             </select>
-                        </form>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
-                        <button type="button" class="btn btn-primary">Salir al Inicio</button>
+                        <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
+                        <button type="button" class="btn btn-primary"> <a style="color:#FFFFFF" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
+                        <button type="input" name="Registrar" class="btn btn-primary">Registrar</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
