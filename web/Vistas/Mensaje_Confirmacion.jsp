@@ -26,19 +26,19 @@
     <body>
         <%
             DtinfoPropuesta propuestaSelec = (DtinfoPropuesta) request.getAttribute("Propuestaseleccionada");
-            String pru = URLEncoder.encode(propuestaSelec.getTitulo(), "UTF-8");
+            String Opcion = propuestaSelec.getTitulo();
         %>
         <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 align="center" class="modal-title" id="exampleModalLabel">Registrar la colaboración con la propuesta "<% out.print(pru);%>"</h4>
+                        <h4 align="center" class="modal-title" id="exampleModalLabel">Registrar la colaboración con la propuesta "<% out.print(Opcion);%>"</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-signin" action="ServletRegistroColaboracion" method="POST">
                             <div class="form-group">
-                                <label required name="Monto" for="recipient-name" class="col-form-label">Monto</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <label required for="recipient-name" class="col-form-label">Monto</label>
+                                <input name="Monto" type="text" class="form-control" id="recipient-name">
                             </div>
                             <select name="Tipo_Retorno" class="form-control" style="width: 26%;">
                                 <% if (propuestaSelec.getTipoRetorno().compareTo(TipoRetorno.Entradas) == 0) {
@@ -56,7 +56,7 @@
                     <div class="modal-footer">
                         <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
                         <button type="button" class="btn btn-primary"> <a style="color:#FFFFFF" href="/CulturarteWeb/ServletInicio">Salir al Inicio</a> </button>
-                        <button type="input" name="Registrar" class="btn btn-primary">Registrar</button>
+                      <button type="input" name="Registrar" class="btn btn-primary"></button>
                     </div>
                     </form>
                 </div>

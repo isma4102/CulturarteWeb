@@ -23,8 +23,8 @@
         <title>Registrar Colaboración</title>
     </head>
     <body>
-
         <jsp:include page="/Vistas/Barra_menu.jsp" />
+
         <table class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
             <thead>
             <h3 style="position: absolute;top: 76px;left: 657px;">Registro de propuestas</h3>
@@ -55,7 +55,8 @@
                     }
                 %>
             </tbody>
-        </div>
+           
+
     </table>
 </body>
 </html>

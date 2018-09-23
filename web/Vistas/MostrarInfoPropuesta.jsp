@@ -30,9 +30,7 @@
 
         <%
             DtinfoPropuesta propuestaSelec = (DtinfoPropuesta) request.getAttribute("Propuestaseleccionada");
-            String dir = System.getProperty("user.dir") + "\\fPropuestas\\";
-            String dir3 = URLEncoder.encode(dir, "UTF-8");
-            String dir2 = dir3.concat(propuestaSelec.getImagen());
+        
         %>
 
         <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -51,7 +49,7 @@
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Titulo</span>
-                                    <input readonly  type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTitulo());%>"/>
+                                    <input readonly  type="text" class="form-control" placeholder="<% out.print(propuestaSelec.getTitulo()); %>"/>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">

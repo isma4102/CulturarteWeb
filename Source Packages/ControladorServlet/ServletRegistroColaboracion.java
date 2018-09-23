@@ -64,13 +64,16 @@ public class ServletRegistroColaboracion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("Ver") != null) {
-            String Opcion = request.getParameter("TituloP");
+            String viene = request.getParameter("TituloP");
+            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
             DtinfoPropuesta propuesta = IPC.RetornarPropuestaR(Opcion);
             request.setAttribute("Propuestaseleccionada", propuesta);
             request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
         } else if (request.getParameter("seleccionar") != null) {
-            String Opcion = request.getParameter("TituloP");
+            String viene = request.getParameter("TituloP");
+            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
             DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
+            ICU.SeleccionarColaborador((String)request.getSession().getAttribute("usuario_logueado"));
             request.setAttribute("Propuestaseleccionada", propuesta);
             request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
         } else if (request.getParameter("Registrar") != null) {
@@ -84,22 +87,22 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         OK = IPC.agregarColaboracion(true, monto_final);
                     } catch (Exception ex) {
                         request.setAttribute("mensaje", ex.getMessage());
-                        request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
+                        request.getRequestDispatcher("ServletInicio").forward(request, response);
                     }
                     if (OK == true) {
-                        request.setAttribute("mensaje", "La colaboracion se registro correctamente");
-                        request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
+                        request.setAttribute("mensaje", "La colaboración se registró correctamente");
+                        request.getRequestDispatcher("ServletInicio").forward(request, response);
                     }
-                } else if (Tipo_entrada.compareTo("Por_Ganancias") == 0) {
+                } else if (Tipo_entrada.compareTo("Por_ganancias") == 0) {
                     try {
                         OK = IPC.agregarColaboracion(false, monto_final);
                     } catch (Exception ex) {
                         request.setAttribute("mensaje", ex.getMessage());
-                        request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
+                        request.getRequestDispatcher("ServletInicio").forward(request, response);
                     }
                     if (OK == true) {
-                         request.setAttribute("mensaje", "La colaboracion se registro correctamente");
-                        request.getRequestDispatcher("/Vistas/FuncionamientoCorrecto.jsp").forward(request, response);
+                        request.setAttribute("mensaje", "La colaboración se registró correctamente");
+                        request.getRequestDispatcher("ServletInicio").forward(request, response);
                     }
                 }
             }

@@ -95,8 +95,7 @@ public class Login extends HttpServlet {
         // chequea contraseña
 //		try {
                       
-                        fabrica.limpiarBaseDeDatos();
-                        fabrica.cargarDatosdePrueba();
+
                         
 			DtUsuario usr = ICU.ObtenerDTUsuario(login);
 			if(usr.getPassword().compareTo(password)!=0)
