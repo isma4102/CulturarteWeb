@@ -91,7 +91,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración se registró correctamente";
+                        String MENSAJE = "La colaboración con la propuesta "+ IPC.getPropuesta().getTituloP() + " se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
@@ -104,7 +104,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración se registró correctamente";
+                        String MENSAJE = "La colaboración con la propuesta "+ IPC.getPropuesta().getTituloP() + " se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
