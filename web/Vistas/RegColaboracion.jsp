@@ -25,7 +25,11 @@
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-
+        <%
+            if (request.getSession().getAttribute("usuario_logueado") == null) {
+                request.setAttribute("mensaje", "No existe una sesion en el sistema");
+                request.getRequestDispatcher("Mensaje_Recibido.jsp").forward(request, response);
+            }%>
         <table class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
             <thead>
             <h3 style="position: absolute;top: 76px;left: 657px;">Registro de propuestas</h3>
