@@ -53,7 +53,7 @@
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Descripcion</span>
+                                    <span class="input-group-addon">Descripción</span>
                                     <textarea readonly style="height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
                                 </div>
                                 </br>

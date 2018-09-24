@@ -13,7 +13,7 @@
         <script type="text/javascript" src="js/jquery.js"></script> 
         <link href="css/bootstrap.css" rel="stylesheet">
         <script src="js/bootstrap.js"></script>
-         <script>
+        <script>
             $(document).ready(function ()
             {
                 $("#mostrarmodal").modal("show");
@@ -26,10 +26,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 align="center" class="modal-title" id="exampleModalLabel">Mensaje</h5>
-                       
+
                     </div>
                     <div class="modal-body">
-                        <% out.print(request.getAttribute("mensaje")); %>
+                        <%out.print(request.getAttribute("mensaje"));%>
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:window.history.back();" class="btn btn-danger"> &laquo; Volver</a>
