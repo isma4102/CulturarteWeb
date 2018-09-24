@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript" src="../jquery.js"></script>
-        <link rel="stylesheet" type="text/css" href="../AltaProp.css" />
+        <script type="text/javascript" src="/CulturarteWeb/script/jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="/CulturarteWeb/css/AltaProp.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nueva Propuesta</title>
@@ -12,7 +12,7 @@
     <body>
 
         <h1>Informacion de la propuesta:</h1>
-        <form action="../ServletAltaPropuesta" method="post" onsubmit="return validarPropuesta()">
+        <form action="ServletAltaPropuesta" method="post" onsubmit="return validarPropuesta()">
             <div>
                 <label for="Categoria">Categoria </label>
                 <select id="Categoria" name="Categoria">
@@ -65,6 +65,6 @@
                 <input type="submit" value="Crear Propuesta" />
             </div>
         </form>
-        <script type="text/javascript" src="../AltaPropuesta.js"></script>
+                <script type="text/javascript" src="/CulturarteWeb/AltaPropuesta.js"></script>
     </body>
 </html>

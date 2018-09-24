@@ -32,14 +32,8 @@ public class ServletRegistroColaboracion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        IPC.comprobarBaseCat();
-        ICU.CargarUsuarios();
-        IPC.CargarPropuestas();
-        IPC.CargarColaboraciones();
-        List<DtNickTitProp> lista = IPC.listarPropuestaC();
-        List<DtinfoColaborador> lista2 = ICU.ListarColaboradores();
+        List<DtNickTitProp> lista = IPC.listarPropuestasR();
         request.setAttribute("lista_propuestas", lista);
-        request.setAttribute("lista_colaboradores", lista2);
         request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
     }
 
@@ -69,10 +63,54 @@ public class ServletRegistroColaboracion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Opcion = request.getParameter("TituloP");
-        DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-        request.setAttribute("Propuestaseleccionada", propuesta);
-        request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
+        if (request.getParameter("Ver") != null) {
+            String viene = request.getParameter("TituloP");
+            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
+            DtinfoPropuesta propuesta = IPC.RetornarPropuestaR(Opcion);
+            request.setAttribute("Propuestaseleccionada", propuesta);
+            request.getRequestDispatcher("/Vistas/MostrarInfoPropuesta.jsp").forward(request, response);
+        } else if (request.getParameter("seleccionar") != null) {
+            String viene = request.getParameter("TituloP");
+            String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
+            DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
+            ICU.SeleccionarColaborador((String) request.getSession().getAttribute("usuario_logueado"));
+            request.setAttribute("Propuestaseleccionada", propuesta);
+            request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
+        } else if (request.getParameter("Registrar") != null) {
+            if (request.getSession().getAttribute("usuario_logueado") != null) {
+                String Tipo_entrada = request.getParameter("Tipo_Retorno");
+                String monto = request.getParameter("Monto");
+                float monto_final = Float.parseFloat(monto);
+                boolean OK = false;
+                if (Tipo_entrada.compareTo("Entradas") == 0) {
+                    try {
+                        OK = IPC.agregarColaboracion(true, monto_final);
+                    } catch (Exception ex) {
+                        String MENSAJE = ex.getMessage();
+                        request.setAttribute("mensaje", MENSAJE);
+                        request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                    }
+                    if (OK == true) {
+                        String MENSAJE = "La colaboración con la propuesta "+ IPC.getPropuesta().getTituloP() + " se registró correctamente";
+                        request.setAttribute("mensaje", MENSAJE);
+                        request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                    }
+                } else if (Tipo_entrada.compareTo("Por_ganancias") == 0) {
+                    try {
+                        OK = IPC.agregarColaboracion(false, monto_final);
+                    } catch (Exception ex) {
+                        String MENSAJE = ex.getMessage();
+                        request.setAttribute("mensaje", MENSAJE);
+                        request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                    }
+                    if (OK == true) {
+                        String MENSAJE = "La colaboración con la propuesta "+ IPC.getPropuesta().getTituloP() + " se registró correctamente";
+                        request.setAttribute("mensaje", MENSAJE);
+                        request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+                    }
+                }
+            }
+        }
     }
 
     /**

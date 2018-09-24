@@ -3,6 +3,7 @@
     Created on : 18/09/2018, 10:40:35 PM
     Author     : Santiago.S
 --%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="javax.swing.ImageIcon"%>
@@ -29,15 +30,14 @@
 
         <%
             DtinfoPropuesta propuestaSelec = (DtinfoPropuesta) request.getAttribute("Propuestaseleccionada");
-            String dir = System.getProperty("user.dir") + "\\fPropuestas\\";
-            String dir2 = dir.concat(propuestaSelec.getImagen());
+        
         %>
 
         <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3>Informacion de la Propuesta</h3>
+                        <h3 align="center">Informacion de la Propuesta</h3>
                     </div>
                     <div class="modal-body">
                         <div id="mostrarinfo">
@@ -49,12 +49,12 @@
                                 </br>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Titulo</span>
-                                    <input readonly  type="text" class="form-control" placeholder="<%out.print(propuestaSelec.getTitulo());%>"/>
+                                    <input readonly  type="text" class="form-control" placeholder="<% out.print(propuestaSelec.getTitulo()); %>"/>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Descripcion</span>
-                                    <textarea style="resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
+                                    <span class="input-group-addon">Descripción</span>
+                                    <textarea readonly style="height: 76px;resize: none" class="form-control rounded-0" rows="20"><%out.print(propuestaSelec.getDescripcion());%></textarea>
                                 </div>
                                 </br>
                                 <div class="input-group input-group-sm">

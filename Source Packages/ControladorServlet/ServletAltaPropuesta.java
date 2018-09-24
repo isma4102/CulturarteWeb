@@ -92,7 +92,7 @@ public class ServletAltaPropuesta extends HttpServlet {
 
                 try {
                     //DtUsuario dtLogeado = (DtUsuario) request.getSession().getAttribute("usuario_logeado");
-                    DtUsuario dtLogeado = new DtUsuario("mbusca", "", "", "", fecha, "","",false);
+                    DtUsuario dtLogeado = new DtUsuario("mbusca", "", "", "", fecha, "","");
 
                     boolean encontrado = Fabrica.getInstance().getControladorPropCat().seleccionarUC(dtLogeado.getNickName(), cat);
 

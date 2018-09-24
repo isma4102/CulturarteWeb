@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="css/tabs.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <script src="js/bootstrap.js"></script>
-        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="/CulturarteWeb/js/jquery.js"></script>
         <style>
             .dev-page{visibility: hidden; }            
         </style>
@@ -21,7 +21,6 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" onclick="toggleSidebarEsconder()">
                         <img src="Imagenes/menu-icono.png" alt="" class="menu-bar">
-
                     </button>
                     <jsp:include page="/Vistas/Menu_lateral.jsp" />
                 </div>
