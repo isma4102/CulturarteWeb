@@ -13,9 +13,7 @@
     </head>
     <body>
         <h1> El resultado de la operacion realizada es: </h1>
-
+        
         <label> <%=request.getAttribute("mensaje")%> </label> 
-    <li><a style="color: black" href="/CulturarteWeb/ServletInicio" >Regresar al inicio</a></li>
-    <li><a style="color: black" href="/CulturarteWeb/ServletAltaPropuesta" >Generar una nueva Propuesta</a></li>
-</body>
+    </body>
 </html>
