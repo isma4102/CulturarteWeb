@@ -56,7 +56,7 @@ public class servletBuscador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String busqueda = request.getParameter("busqueda");
+        String busqueda = request.getParameter("busqueda").toLowerCase();
         iControlador = Fabrica.getInstance().getControladorPropCat();
         List<DtinfoPropuesta> resultado = new ArrayList<>();
         Map<String, Propuesta> propuestas = iControlador.getPropuestas();
