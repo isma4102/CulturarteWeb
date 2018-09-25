@@ -1,34 +1,24 @@
-package ControladorServlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package ControladorServlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Clases.DtUsuario;
-import logica.Clases.DtinfoPropuesta;
-import logica.Fabrica;
-import logica.Interfaces.IControladorUsuario;
-import logica.Interfaces.IPropCat;
 
 /**
  *
  * @author gabri
  */
-@WebServlet("/ServletConsultarUsuario")
-public class ServletConsultarUsuario extends HttpServlet {
-
-    IControladorUsuario ICU;
-    IPropCat ICP;
+@WebServlet(name = "ServletPropuestaFavorita", urlPatterns = {"/ServletPropuestaFavorita"})
+public class ServletPropuestaFavorita extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,12 +32,18 @@ public class ServletConsultarUsuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ICU = Fabrica.getInstance().getIControladorUsuario();
-        ICU.CargarUsuarios();
-        List<DtUsuario> usuarios = ICU.ListarUsuarios();
-        request.setAttribute("Usuarios", usuarios);
-        request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario.jsp").forward(request, response);
-
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ServletPropuestaFavorita</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ServletPropuestaFavorita at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,29 +72,7 @@ public class ServletConsultarUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nickname = request.getParameter("nick");
-        DtUsuario dtu = ICU.ObtenerDTUsuario(nickname);
-        List<DtUsuario> seguidos = ICU.ObtenerSeguidos(nickname);
-        List<DtUsuario> seguidores = ICU.ObtenerSeguidores(nickname);
-        ICU.CargarFavoritas();
-        List<DtinfoPropuesta> favoritas = ICU.obtenerfavoritas(nickname);
-        request.setAttribute("Seguidos", seguidos);
-        request.setAttribute("Seguidores", seguidores);
-        request.setAttribute("Usuario", dtu);
-        request.setAttribute("Favoritas", favoritas);
-        List<DtinfoPropuesta> propuestasing= ICP.ListarPropuestasDeProponenteX(nickname);
-      request.setAttribute("Propuestas2", propuestasing);
-        ICP=Fabrica.getInstance().getControladorPropCat();
-        if(dtu.Esproponente()){
-           List<DtinfoPropuesta> propuestas= ICP.ListarPropuestasNoIngresadas(nickname);
-            request.setAttribute("Propuestas",propuestas);
-        }else{
-            Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
-            List<DtinfoPropuesta> colaboraciones=ICU.verPropuestas(nickname);
-            request.setAttribute("Colaboraciones",colaboraciones );
-        }
-                
-        request.getRequestDispatcher("Vistas/ConsultarPerfilUsuario2.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

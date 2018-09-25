@@ -37,6 +37,7 @@ public class ServletInicio extends HttpServlet {
             Fabrica.getInstance().getControladorPropCat().CargarPropuestas();
             Fabrica.getInstance().getControladorPropCat().CargarColaboraciones();
             Fabrica.getInstance().getControladorPropCat().comprobarBaseCat();
+            Fabrica.getInstance().getIControladorUsuario().CargarFavoritas();
 
         } catch (Exception ex) {
             ex.printStackTrace();
