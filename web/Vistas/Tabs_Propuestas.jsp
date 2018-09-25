@@ -1,4 +1,4 @@
-        <link rel="stylesheet" type="text/css" href="css/tabs.css">
+        <link rel="stylesheet" type="text/css" href="/CulturarteWeb/css/tabs.css">
         
         <br><br><br><br><br><br>
         <div id="main">

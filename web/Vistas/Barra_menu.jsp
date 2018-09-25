@@ -36,7 +36,7 @@
                         <li style="margin-top: 1px"><a href="#">Quiero ver Propuestas</a></li>
                     </ul>
                     <form action="servletBuscador" method="GET" class="navbar-form navbar-right">
-                        <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..."/>
+                        <input name="busqueda" type="text" class="form-control" placeholder="Titulo, descripcion, lugar..." required/>
                         <input id="btnBuscar" type="submit" value="Buscar"/> 
                     </form>
                 </div>
