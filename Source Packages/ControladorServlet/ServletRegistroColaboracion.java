@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Clases.DtNickTitProp;
+import logica.Clases.DtUsuario;
 import logica.Clases.DtinfoColaborador;
 import logica.Clases.DtinfoPropuesta;
 import logica.Fabrica;
@@ -32,9 +33,14 @@ public class ServletRegistroColaboracion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<DtNickTitProp> lista = IPC.listarPropuestasR();
-        request.setAttribute("lista_propuestas", lista);
-        request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
+        if (request.getSession().getAttribute("usuario_logueado") == null) {
+            request.setAttribute("mensaje", "No existe una sesion en el sistema");
+            request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
+        } else {
+            List<DtNickTitProp> lista = IPC.listarPropuestasR();
+            request.setAttribute("lista_propuestas", lista);
+            request.getRequestDispatcher("/Vistas/RegColaboracion.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +79,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
             String viene = request.getParameter("TituloP");
             String Opcion = new String(viene.getBytes("ISO-8859-1"), "UTF-8");
             DtinfoPropuesta propuesta = IPC.SeleccionarPropuestaR(Opcion);
-            ICU.SeleccionarColaborador((String) request.getSession().getAttribute("usuario_logueado"));
+            ICU.SeleccionarColaborador(((DtUsuario) request.getSession().getAttribute("usuario_logueado")).getNickName());
             request.setAttribute("Propuestaseleccionada", propuesta);
             request.getRequestDispatcher("/Vistas/Mensaje_Confirmacion.jsp").forward(request, response);
         } else if (request.getParameter("Registrar") != null) {
@@ -91,7 +97,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración con la propuesta "+ IPC.getPropuesta().getTituloP() + " se registró correctamente";
+                        String MENSAJE = "La colaboración con la propuesta " + IPC.getPropuesta().getTituloP() + " se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
@@ -104,7 +110,7 @@ public class ServletRegistroColaboracion extends HttpServlet {
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }
                     if (OK == true) {
-                        String MENSAJE = "La colaboración con la propuesta "+ IPC.getPropuesta().getTituloP() + " se registró correctamente";
+                        String MENSAJE = "La colaboración con la propuesta " + IPC.getPropuesta().getTituloP() + " se registró correctamente";
                         request.setAttribute("mensaje", MENSAJE);
                         request.getRequestDispatcher("/Vistas/Mensaje_Recibido.jsp").forward(request, response);
                     }

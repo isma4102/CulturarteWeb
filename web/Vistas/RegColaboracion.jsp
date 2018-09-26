@@ -15,9 +15,7 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/RegistrarColaboracion.css" rel="stylesheet">
         <script src="js/bootstrap.js"></script>
-        <script src="/CulturarteWeb/script/RegistrarColaboracion.js"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/tabs.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>Registrar Colaboración</title>
@@ -25,11 +23,7 @@
     </head>
     <body>
         <jsp:include page="/Vistas/Barra_menu.jsp" />
-        <%
-            if (request.getSession().getAttribute("usuario_logueado") == null) {
-                request.setAttribute("mensaje", "No existe una sesion en el sistema");
-                request.getRequestDispatcher("Mensaje_Recibido.jsp").forward(request, response);
-            }%>
+
         <table class="table table-bordered table-hover formulario" style="margin-left: 229px;width: 70%;">
             <thead>
             <h3 style="position: absolute;top: 76px;left: 657px;">Registro de propuestas</h3>
@@ -38,10 +32,10 @@
             </form>
 
             <tr>
-                <th class="active">Registrar</th>
-                <th class="active">Titulo de Propuesta</th>
-                <th class="active">Nombre del Proponente</th>
-                <th class="active">Ver</th>
+                <th style="color:black" class="active">Registrar</th>
+                <th style="color:black" class="active">Titulo de Propuesta</th>
+                <th style="color:black" class="active">Nombre del Proponente</th>
+                <th style="color:black" class="active">Ver</th>
             </tr>
         </thead>
         <div style="overflow: auto">
